@@ -20,20 +20,16 @@ export function activate(context: vscode.ExtensionContext) {
                 
                 try {
                     // ✅ CHANGED: Replaced local Ollama API with AWS-hosted Ollama URL
-                    const awsOllamaURL = "http://your-aws-ip:11434/api/generate";
-
-                    const requestBody = {
-                        model: "deepseek-r1:1.5b",
-                        prompt: userPrompt,
-                        stream: false  
-                    };
-
-                    const response = await fetch(awsOllamaURL, {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(requestBody)
-                    });
-
+					const response = await fetch('http://65.0.71.97:11434/api/generate', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({
+							model: 'deepseek-r1:1.1b',
+							prompt: userPrompt,
+							stream: true
+						})
+					});
+					
                     const responseData = await response.json();
                     responseText = responseData.response;
 
