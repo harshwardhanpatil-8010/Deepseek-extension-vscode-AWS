@@ -25,7 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
                     const requestBody = {
                         model: "deepseek-r1:1.5b",
                         prompt: userPrompt,
-                        stream: false // Not using streaming for simplicity
+                        stream: false  
                     };
 
                     const response = await fetch(awsOllamaURL, {
