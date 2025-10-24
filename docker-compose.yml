@@ -1,0 +1,38 @@
+# docker-compose.yml - For local development and orchestration
+# PreciOps AI DevOps Agent
+
+version: '3.8'
+
+services:
+  # The main application service
+  app:
+    # Build the image from the Dockerfile in the current directory
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: preciops_app
+    ports:
+      # Map port 8080 on the host to port 80 in the container
+      - "8080:80"
+    restart: unless-stopped
+    # Example of adding a dependency link. Uncomment if you add the 'db' service.
+    # depends_on:
+    #   - db
+
+  # --- Optional Dependency Example: PostgreSQL Database ---
+  # Uncomment this section if your application requires a database.
+  # db:
+  #   image: postgres:15-alpine
+  #   container_name: preciops_db
+  #   environment:
+  #     POSTGRES_DB: mydatabase
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
+  #   restart: unless-stopped
+
+# --- Optional Named Volume for Data Persistence ---
+# Uncomment to persist database data across container restarts.
+# volumes:
+#   db_data:
